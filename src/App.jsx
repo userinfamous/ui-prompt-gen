@@ -233,7 +233,7 @@ function DesignPreview({ cfg, effectivePalette }) {
       </div>
 
       {/* Hero area */}
-      <div className="px-5 pt-6 pb-5">
+      <div className="px-5 pt-6 pb-6">
         {/* Heading */}
         <h2
           className="leading-tight mb-2"
@@ -288,7 +288,7 @@ function DesignPreview({ cfg, effectivePalette }) {
         </div>
 
         {/* Mini cards row */}
-        <div className="grid grid-cols-3 gap-2 mb-5">
+        <div className="grid grid-cols-3 gap-2.5 mb-5">
           {[
             { label: "Primary",   color: palette.primary },
             { label: "Secondary", color: palette.secondary },
@@ -324,11 +324,11 @@ function DesignPreview({ cfg, effectivePalette }) {
         </div>
 
         {/* Footer meta row */}
-        <div className="flex flex-wrap gap-x-5 gap-y-1.5 border-t pt-4" style={{ borderColor: borderCol }}>
+        <div className="flex flex-wrap gap-x-6 gap-y-2 border-t pt-4 mt-1" style={{ borderColor: borderCol }}>
           <div className="flex items-center gap-1.5">
             <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: lightenHex(palette.neutral, 0.35) }}>Type</span>
             <span className="text-[11px] font-bold" style={{ color: lightenHex(palette.neutral, 0.7), fontFamily: `'${cfg.heading}', serif` }}>{cfg.heading}</span>
-            <span className="text-[11px]" style={{ color: lightenHex(palette.neutral, 0.4) }}>+</span>
+            <span className="text-[11px]" style={{ color: lightenHex(palette.neutral, 0.4) }}>·</span>
             <span className="text-[11px]" style={{ color: lightenHex(palette.neutral, 0.6) }}>{cfg.body}</span>
           </div>
           <div className="flex items-center gap-1.5">
@@ -363,14 +363,14 @@ function CardHeader({ title, subtitle }) {
   return (
     <div className="px-5 pt-5 pb-4 border-b border-[#1a1a1a]">
       <h3 className="text-sm font-semibold text-[#e0dcd4]">{title}</h3>
-      {subtitle && <p className="text-xs text-[#4a4a4a] mt-0.5">{subtitle}</p>}
+      {subtitle && <p className="text-xs text-[#4a4a4a] mt-1">{subtitle}</p>}
     </div>
   );
 }
 
 function FieldLabel({ children }) {
   return (
-    <p className="text-xs font-semibold text-[#4a4a4a] mb-3 uppercase tracking-widest">{children}</p>
+    <p className="text-xs font-semibold text-[#4a4a4a] mb-3.5 uppercase tracking-widest">{children}</p>
   );
 }
 
@@ -381,7 +381,7 @@ function FontCard({ font, selected, onClick, large }) {
       onClick={onClick}
       aria-pressed={selected}
       aria-label={`Select ${font}`}
-      className={`p-3 rounded-xl border text-left transition-all duration-150 select-none
+      className={`p-3.5 rounded-xl border text-left transition-all duration-150 select-none
         hover:scale-[1.02] active:scale-[0.97] ${
         selected
           ? "border-[#c8f135] bg-[#c8f13510]"
@@ -521,7 +521,7 @@ export default function App() {
   // ── Config panel content ──────────────────────────────────────────────────
 
   const ConfigPanel = (
-    <div className="space-y-5">
+    <div className="space-y-6">
 
       {/* Live Preview */}
       <Card>
@@ -534,13 +534,13 @@ export default function App() {
       {/* Presets */}
       <Card>
         <CardHeader title="Quick Start" subtitle="Load a complete pre-built style configuration" />
-        <div className="p-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+        <div className="p-5 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {PRESETS.map((p, i) => (
             <button
               key={p.name}
               type="button"
               onClick={() => applyPreset(p, i)}
-              className={`flex flex-col items-center gap-2.5 py-4 px-3 rounded-xl border text-center transition-all duration-150 hover:scale-[1.02] active:scale-[0.97] ${
+              className={`flex flex-col items-center gap-3 py-5 px-3 rounded-xl border text-center transition-all duration-150 hover:scale-[1.02] active:scale-[0.97] ${
                 activePreset === i
                   ? "bg-[#c8f135] border-[#c8f135] text-[#0a0a0a] shadow-[0_4px_20px_#c8f13328]"
                   : "bg-[#181818] border-[#222] text-[#666] hover:border-[#333] hover:text-[#aaa] hover:bg-[#1c1c1c]"
@@ -556,10 +556,10 @@ export default function App() {
       {/* Typography */}
       <Card>
         <CardHeader title="Typography" subtitle="Choose a heading and body font pairing" />
-        <div className="p-5 space-y-6">
+        <div className="p-5 space-y-7">
           <div>
             <FieldLabel>Heading Font</FieldLabel>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-4 gap-2.5">
               {HEADING_FONTS.map((f) => (
                 <FontCard key={f} font={f} selected={cfg.heading === f} onClick={() => set("heading", f)} large />
               ))}
@@ -567,7 +567,7 @@ export default function App() {
           </div>
           <div>
             <FieldLabel>Body Font</FieldLabel>
-            <div className="grid grid-cols-4 gap-2 sm:grid-cols-7">
+            <div className="grid grid-cols-4 gap-2.5 sm:grid-cols-7">
               {BODY_FONTS.map((f) => (
                 <FontCard key={f} font={f} selected={cfg.body === f} onClick={() => set("body", f)} large={false} />
               ))}
@@ -580,8 +580,8 @@ export default function App() {
       {/* Color */}
       <Card>
         <CardHeader title="Color System" subtitle="Pick a base palette" />
-        <div className="p-5 space-y-4">
-          <div className="grid grid-cols-4 gap-2 sm:grid-cols-8">
+        <div className="p-5 space-y-5">
+          <div className="grid grid-cols-4 gap-2.5 sm:grid-cols-8">
             {PALETTES.map((p) => (
               <button
                 key={p.name}
@@ -607,7 +607,7 @@ export default function App() {
             ))}
           </div>
           {/* Clickable color strip */}
-          <div className="rounded-xl overflow-hidden border border-[#2a2a2a] h-14 flex cursor-pointer" style={{ isolation: "isolate" }}>
+          <div className="rounded-xl overflow-hidden border border-[#2a2a2a] h-16 flex cursor-pointer" style={{ isolation: "isolate" }}>
             {[
               { slot: "neutral",   label: "BG",        color: effectivePalette.neutral,   flex: "flex-1" },
               { slot: "primary",   label: "Primary",   color: effectivePalette.primary,   flex: "w-1/4" },
@@ -641,10 +641,10 @@ export default function App() {
               </label>
             ))}
           </div>
-          <div className="flex justify-between text-xs px-0.5" style={{ color: "#666" }}>
-            <span>BG <span className="font-mono">{effectivePalette.neutral}</span> {ov.neutral ? <span className="text-[#c8f135]">custom</span> : ""}</span>
-            <span>Primary <span className="font-mono">{effectivePalette.primary}</span> {ov.primary ? <span className="text-[#c8f135]">custom</span> : ""}</span>
-            <span>Secondary <span className="font-mono">{effectivePalette.secondary}</span> {ov.secondary ? <span className="text-[#c8f135]">custom</span> : ""}</span>
+          <div className="grid grid-cols-3 gap-3 text-xs px-1" style={{ color: "#666" }}>
+            <span>BG <span className="font-mono text-[11px]">{effectivePalette.neutral}</span> {ov.neutral ? <span className="text-[#c8f135]">custom</span> : ""}</span>
+            <span className="text-center">Primary <span className="font-mono text-[11px]">{effectivePalette.primary}</span> {ov.primary ? <span className="text-[#c8f135]">custom</span> : ""}</span>
+            <span className="text-right">Secondary <span className="font-mono text-[11px]">{effectivePalette.secondary}</span> {ov.secondary ? <span className="text-[#c8f135]">custom</span> : ""}</span>
           </div>
         </div>
       </Card>
@@ -652,8 +652,8 @@ export default function App() {
       {/* Theme */}
       <Card>
         <CardHeader title="Theme / Vibe" subtitle="Select one or combine multiple aesthetics" />
-        <div className="p-5 space-y-4">
-          <div className="flex flex-wrap gap-2">
+        <div className="p-5 space-y-5">
+          <div className="flex flex-wrap gap-2.5">
             {VIBES.map((v) => (
               <ToggleChip key={v} label={v} active={cfg.themes.includes(v)} onClick={() => toggleTheme(v)} />
             ))}
@@ -676,8 +676,8 @@ export default function App() {
       {/* Components */}
       <Card>
         <CardHeader title="Components" subtitle="Button shape and visual style" />
-        <div className="p-5 space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="p-5 space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <FieldLabel>Button Shape</FieldLabel>
               <div className="flex gap-2">
@@ -744,10 +744,10 @@ export default function App() {
       {/* Animations */}
       <Card>
         <CardHeader title="Animations" subtitle="Motion style and timing intensity" />
-        <div className="p-5 space-y-5">
+        <div className="p-5 space-y-6">
           <div>
             <FieldLabel>Motion Style</FieldLabel>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2.5">
               {["Subtle", "Precise", "Dramatic", "Bouncy", "Glitch"].map((v) => (
                 <ToggleChip
                   key={v}
@@ -782,7 +782,7 @@ export default function App() {
       {/* Layout */}
       <Card>
         <CardHeader title="Layout" subtitle="Grid system and spacing scale" />
-        <div className="p-5 grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="p-5 grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <FieldLabel>Grid Type</FieldLabel>
             <SegmentControl
@@ -817,13 +817,13 @@ export default function App() {
   // ── Prompt panel content ──────────────────────────────────────────────────
 
   const PromptPanel = (
-    <div className="flex flex-col gap-4 h-full">
+    <div className="flex flex-col gap-5 h-full">
 
       {/* Output mode */}
       <Card>
-        <div className="p-4">
+        <div className="p-5">
           <FieldLabel>Output Mode</FieldLabel>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-2.5">
             {[
               { val: "concise",      label: "Concise",      desc: "Core spec only" },
               { val: "verbose",      label: "Verbose",      desc: "Full detail" },
@@ -834,7 +834,7 @@ export default function App() {
                 type="button"
                 onClick={() => set("outputMode", m.val)}
                 aria-pressed={cfg.outputMode === m.val}
-                className={`py-3 px-2 rounded-xl border text-center transition-all duration-150 ${
+                className={`py-3.5 px-2 rounded-xl border text-center transition-all duration-150 ${
                   cfg.outputMode === m.val
                     ? "bg-[#c8f13510] border-[#c8f13550]"
                     : "bg-[#181818] border-[#222] hover:border-[#2e2e2e] hover:bg-[#1c1c1c]"
@@ -856,9 +856,9 @@ export default function App() {
           { label: "Themes",     value: cfg.themes.length || 1 },
         ].map((s) => (
           <Card key={s.label}>
-            <div className="px-4 py-3.5">
-              <div className="text-xs text-[#3a3a3a] mb-1">{s.label}</div>
-              <div className="text-xl font-bold text-[#e0dcd4]">{s.value}</div>
+            <div className="px-4 py-4">
+              <div className="text-[11px] text-[#3a3a3a] mb-1.5 uppercase tracking-wider font-medium">{s.label}</div>
+              <div className="text-2xl font-bold text-[#e0dcd4]">{s.value}</div>
             </div>
           </Card>
         ))}
@@ -866,7 +866,7 @@ export default function App() {
 
       {/* Prompt output */}
       <Card className="flex-1 flex flex-col min-h-0">
-        <div className="px-5 py-3.5 border-b border-[#1a1a1a] flex items-center justify-between shrink-0">
+        <div className="px-5 py-4 border-b border-[#1a1a1a] flex items-center justify-between shrink-0">
           <span className="text-xs font-semibold text-[#444] uppercase tracking-widest">Generated Prompt</span>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#c8f13560]" style={{ boxShadow: "0 0 6px #c8f13560" }} />
@@ -900,7 +900,7 @@ export default function App() {
       </Card>
 
       {/* Action buttons */}
-      <div className="space-y-3 shrink-0">
+      <div className="space-y-3.5 shrink-0">
         <button
           type="button"
           onClick={copyPrompt}
@@ -977,8 +977,8 @@ export default function App() {
 
         {/* ── Header ─────────────────────────────────────────────────────── */}
         <header className="sticky top-0 z-40 border-b border-[#181818]" style={{ background: "rgba(10,10,10,0.95)", backdropFilter: "blur(16px)" }}>
-          <div className="max-w-screen-xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-            <div className="flex items-center gap-3.5">
+          <div className="max-w-screen-xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between">
+            <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: "#c8f135", boxShadow: "0 0 20px #c8f13560" }}>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path d="M4 5h8M4 8h12M4 11h6M4 14h9" stroke="#0a0a0a" strokeWidth="1.8" strokeLinecap="round"/>
@@ -1022,12 +1022,12 @@ export default function App() {
         </div>
 
         {/* ── Content ─────────────────────────────────────────────────────── */}
-        <main className="max-w-screen-xl mx-auto px-5 sm:px-8 py-7">
+        <main className="max-w-screen-xl mx-auto px-6 sm:px-8 py-8">
 
           {/* Desktop: side by side */}
-          <div className="hidden lg:flex gap-7 items-start">
+          <div className="hidden lg:flex gap-8 items-start">
             <div className="flex-1 min-w-0">{ConfigPanel}</div>
-            <div className="w-[400px] xl:w-[440px] shrink-0 sticky top-[80px]">
+            <div className="w-[400px] xl:w-[440px] shrink-0 sticky top-[84px]">
               {PromptPanel}
             </div>
           </div>
